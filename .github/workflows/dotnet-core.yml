@@ -29,8 +29,8 @@ jobs:
     - name: Test
       if: runner.os == 'Windows'
       run: |
-        pwd
-        ls
+        dir
+        Get-ChildItem -Name
         find ./ -name *.UnitTests.csproj | xargs -I % dotnet add % package coverlet.msbuild
         dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=${GITHUB_WORKSPACE}/coverage/lcov
     - name: Coveralls
