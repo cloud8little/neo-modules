@@ -11,10 +11,7 @@ env:
 jobs:
 
   Test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v1
@@ -27,15 +24,10 @@ jobs:
         dotnet tool install --version 3.2.111002 --tool-path ./ dotnet-format --add-source https://dotnet.myget.org/F/format/api/v3/index.json
         # ./dotnet-format --check --dry-run -v diagnostic
     - name: Test
-      if: runner.os == 'Windows'
       run: |
-        dir
-        Get-ChildItem -Name
         find ./ -name *.UnitTests.csproj | xargs -I % dotnet add % package coverlet.msbuild
         dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=${GITHUB_WORKSPACE}/coverage/lcov
     - name: Coveralls
-      if: runner.os == 'Windows'
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: \coverage\lcov.info
