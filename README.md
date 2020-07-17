@@ -70,6 +70,7 @@ Plugin that enables NEP5 tracking using LevelDB.
 This module works in conjunction with RpcServer, otherwise, just local storage (on leveldb) would be created. 
 
 ## C# SDK
+blabla
 
 ### RpcClient
 The RpcClient Project is an individual SDK that is used to interact with NEO blockchain through NEO RPC methods for development using. The main functions include RPC calling, Transaction making, Contract deployment & calling, and Asset transfering.
